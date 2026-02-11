@@ -1,26 +1,20 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "claudeplugins-dev",
+  "name": "Claude Plugins Community Registry",
   "description": "The premier community marketplace for Claude Code plugins, MCP servers, and skills.",
-  "owner": {
-    "name": "ClaudePlugins.dev Community",
-    "email": "support@claudeplugins.dev",
-    "url": "https://claudeplugins.dev"
-  },
   "plugins": [
     {
-      "name": "example-plugin",
-      "source": {
-        "source": "github",
-        "repo": "username/example-plugin"
-      },
+      "id": "example-plugin",
+      "name": "Example Plugin",
       "description": "An example plugin demonstrating the marketplace format.",
+      "author": "username",
+      "repo": "username/example-plugin",
       "category": "Tool",
-      "tags": ["example", "demo"]
+      "stars": 0,
+      "tags": [
+        "Example",
+        "Demo"
+      ],
+      "installCmd": "/plugin add username/example-plugin"
     }
-  ],
-  "meta": {
-    "version": "1.0.0",
-    "last_updated": "2026-02-10"
-  }
+  ]
 }
