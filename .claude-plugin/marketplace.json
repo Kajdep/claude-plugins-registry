@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "name": "Claude Plugins Community Registry",
   "description": "The premier community marketplace for Claude Code plugins, MCP servers, and skills.",
@@ -19,6 +18,3 @@
     }
   ]
 }
-=======
-{\n  "name": "Claude Plugins Community Registry",\n  "description": "The premier community marketplace for Claude Code plugins, MCP servers, and skills.",\n  "plugins": [\n    {\n      "id": "example-plugin",\n      "name": "Example Plugin",\n      "description": "An example plugin demonstrating the marketplace format.",\n      "author": "username",\n      "repo": "username/example-plugin",\n      "category": "Tool",\n      "stars": 0,\n      "tags": ["Example", "Demo"],\n      "installCmd": "/plugin add username/example-plugin"\n    }\n  ]\n}
->>>>>>> 5a82d70dea73603b15cf16dbe44c3006f9926101

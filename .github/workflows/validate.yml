@@ -28,19 +28,10 @@ jobs:
           echo "Checking JSON syntax..."
           cat .claude-plugin/marketplace.json | jq empty
 
-      - name: Run schema validation
+      - name: Run marketplace validation
         run: |
           node scripts/validate.js
 
-      - name: Check for common issues
-        run: |
-          echo "Checking for trailing commas..."
-          if grep -P ',\s*[}\]]' .claude-plugin/marketplace.json; then
-            echo "Error: Trailing commas detected"
-            exit 1
-          fi
-          echo "No trailing commas found"
-
       - name: Validation successful
         run: |
-          echo "All validations passed!"
+          echo "✓ All validations passed!"
