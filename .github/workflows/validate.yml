@@ -1,0 +1,46 @@
+name: Validate Marketplace Schema
+
+on:
+  pull_request:
+    paths:
+      - '.claude-plugin/marketplace.json'
+  push:
+    branches:
+      - main
+    paths:
+      - '.claude-plugin/marketplace.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate JSON syntax
+        run: |
+          echo "Checking JSON syntax..."
+          cat .claude-plugin/marketplace.json | jq empty
+
+      - name: Run schema validation
+        run: |
+          node scripts/validate.js
+
+      - name: Check for common issues
+        run: |
+          echo "Checking for trailing commas..."
+          if grep -P ',\s*[}\]]' .claude-plugin/marketplace.json; then
+            echo "Error: Trailing commas detected"
+            exit 1
+          fi
+          echo "No trailing commas found"
+
+      - name: Validation successful
+        run: |
+          echo "All validations passed!"
