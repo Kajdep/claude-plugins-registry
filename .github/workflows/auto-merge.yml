@@ -63,9 +63,6 @@ jobs:
               ref: pr.head.sha,
             });
 
-            const allPassed = checks.check_runs.length > 0 &&
-              checks.check_runs.every(c => c.conclusion === 'success' || c.status !== 'completed');
-
             const hasPendingChecks = checks.check_runs.some(c => 
               c.status !== 'completed' || c.conclusion === null
             );
@@ -74,6 +71,9 @@ jobs:
               console.log(`⏳ PR #${pr.number} has checks still in progress`);
               return;
             }
+
+            const allPassed = checks.check_runs.length > 0 &&
+              checks.check_runs.every(c => c.conclusion === 'success');
 
             if (!allPassed) {
               console.log(`⏳ PR #${pr.number} checks not all passed yet`);
