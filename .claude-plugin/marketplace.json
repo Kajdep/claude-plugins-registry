@@ -15,6 +15,17 @@
         "Demo"
       ],
       "installCmd": "/plugin add username/example-plugin"
+    },
+    {
+      "id": "janedeveloper/ai-code-reviewer",
+      "name": "AI Code Reviewer",
+      "description": "Automatically reviews your code using Claude AI to detect bugs and suggest improvements.",
+      "author": "Jane Developer",
+      "repo": "janedeveloper/ai-code-reviewer",
+      "category": "Other",
+      "tags": [],
+      "installCmd": "npm install ai-code-reviewer",
+      "submittedAt": "2026-02-12T02:57:55.663Z"
     }
   ]
 }
