@@ -78,3 +78,4 @@ If **any** of the above validation rules fail or raise concerns:
 - Suggest corrections where applicable
 
 Your review helps maintain the quality and security of the plugin registry. Thank you!
+
