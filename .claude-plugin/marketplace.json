@@ -15,6 +15,17 @@
         "Demo"
       ],
       "installCmd": "/plugin add username/example-plugin"
+    },
+    {
+      "id": "anthropics/claude-code",
+      "name": "Test MCP Weather Plugin",
+      "description": "A test MCP server that provides real-time weather data for any location worldwide. Supports current conditions, forecasts, and historical data.",
+      "author": "TestAuthor",
+      "repo": "anthropics/claude-code",
+      "category": "Other",
+      "tags": [],
+      "installCmd": "npm install claude-code",
+      "submittedAt": "2026-02-13T21:35:33.282Z"
     }
   ]
 }
