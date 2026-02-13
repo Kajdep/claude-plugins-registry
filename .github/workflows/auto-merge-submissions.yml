@@ -1,0 +1,47 @@
+name: Validate & Auto-Merge Plugin Submissions
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - '.claude-plugin/marketplace.json'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  validate:
+    name: Validate Plugin Submission
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate marketplace.json
+        run: node scripts/validate-submission.js
+
+  auto-merge:
+    name: Auto-Merge if Valid
+    needs: validate
+    runs-on: ubuntu-latest
+    if: >
+      github.event.pull_request.user.login != 'dependabot[bot]' &&
+      contains(github.event.pull_request.title, '[Plugin Submission]')
+    steps:
+      - name: Enable auto-merge
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: squash
+
+      - name: Auto-approve
+        uses: hmarr/auto-approve-action@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
