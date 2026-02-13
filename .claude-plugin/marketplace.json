@@ -3,29 +3,190 @@
   "description": "The premier community marketplace for Claude Code plugins, MCP servers, and skills.",
   "plugins": [
     {
-      "id": "example-plugin",
-      "name": "Example Plugin",
-      "description": "An example plugin demonstrating the marketplace format.",
-      "author": "username",
-      "repo": "username/example-plugin",
+      "id": "anthropic-productivity",
+      "name": "Productivity",
+      "description": "Manage tasks, plan your day, and build up memory of important context about your work. Syncs with your calendar, email, and chat to keep everything organized and on track.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
+      "category": "Productivity",
+      "stars": 0,
+      "tags": [
+        "Productivity",
+        "Tasks",
+        "Calendar",
+        "Email",
+        "Organization"
+      ],
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/productivity"
+    },
+    {
+      "id": "anthropic-sales",
+      "name": "Sales",
+      "description": "Prospect, craft outreach, and build deal strategy faster. Prep for calls, manage your pipeline, and write personalized messaging that moves deals forward.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
+      "category": "Business",
+      "stars": 0,
+      "tags": [
+        "Sales",
+        "CRM",
+        "Outreach",
+        "Pipeline",
+        "Deals"
+      ],
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/sales"
+    },
+    {
+      "id": "anthropic-customer-support",
+      "name": "Customer Support",
+      "description": "Triage tickets, draft responses, escalate issues, and build your knowledge base. Research customer context and turn resolved issues into self-service content.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
+      "category": "Business",
+      "stars": 0,
+      "tags": [
+        "Support",
+        "Tickets",
+        "Knowledge Base",
+        "Customer Service"
+      ],
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/customer-support"
+    },
+    {
+      "id": "anthropic-product-management",
+      "name": "Product Management",
+      "description": "Write feature specs, plan roadmaps, and synthesize user research faster. Keep stakeholders updated and stay ahead of the competitive landscape.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
+      "category": "Business",
+      "stars": 0,
+      "tags": [
+        "Product",
+        "Roadmap",
+        "Specs",
+        "User Research",
+        "Strategy"
+      ],
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/product-management"
+    },
+    {
+      "id": "anthropic-marketing",
+      "name": "Marketing",
+      "description": "Create content, plan campaigns, and analyze performance across marketing channels. Maintain brand voice consistency, track competitors, and report on what's working.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
+      "category": "Business",
+      "stars": 0,
+      "tags": [
+        "Marketing",
+        "Content",
+        "Campaigns",
+        "Analytics",
+        "Brand"
+      ],
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/marketing"
+    },
+    {
+      "id": "anthropic-legal",
+      "name": "Legal",
+      "description": "Speed up contract review, NDA triage, and compliance workflows for in-house legal teams. Draft legal briefs, organize precedent research, and manage institutional knowledge.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
+      "category": "Business",
+      "stars": 0,
+      "tags": [
+        "Legal",
+        "Contracts",
+        "Compliance",
+        "NDA",
+        "Legal Research"
+      ],
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/legal"
+    },
+    {
+      "id": "anthropic-finance",
+      "name": "Finance",
+      "description": "Streamline finance and accounting workflows, from journal entries and reconciliation to financial statements and variance analysis. Speed up audit prep, month-end close, and keeping your books clean.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
+      "category": "Business",
+      "stars": 0,
+      "tags": [
+        "Finance",
+        "Accounting",
+        "Reconciliation",
+        "Audit",
+        "Statements"
+      ],
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/finance"
+    },
+    {
+      "id": "anthropic-data",
+      "name": "Data",
+      "description": "Write SQL, explore datasets, and generate insights faster. Build visualizations and dashboards, and turn raw data into clear stories for stakeholders.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
+      "category": "Data & Analytics",
+      "stars": 0,
+      "tags": [
+        "Data",
+        "SQL",
+        "Analytics",
+        "Visualization",
+        "Dashboards"
+      ],
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/data"
+    },
+    {
+      "id": "anthropic-enterprise-search",
+      "name": "Enterprise Search",
+      "description": "Search across all of your company's tools in one place. Find anything across email, chat, documents, and wikis without switching between apps.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
+      "category": "Productivity",
+      "stars": 0,
+      "tags": [
+        "Search",
+        "Enterprise",
+        "Knowledge",
+        "Documents",
+        "Wiki"
+      ],
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/enterprise-search"
+    },
+    {
+      "id": "anthropic-bio-research",
+      "name": "Bio Research",
+      "description": "Connect to preclinical research tools and databases (literature search, genomics analysis, target prioritization) to accelerate early-stage life sciences R&D.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
+      "category": "Research",
+      "stars": 0,
+      "tags": [
+        "Biology",
+        "Research",
+        "Genomics",
+        "Life Sciences",
+        "R&D"
+      ],
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/bio-research"
+    },
+    {
+      "id": "anthropic-cowork-plugin-management",
+      "name": "Cowork Plugin Management",
+      "description": "Create, customize, and manage plugins tailored to your organization's tools and workflows. Configure MCP servers, adjust plugin behavior, and adapt templates to match how your team works.",
+      "author": "Anthropic",
+      "repo": "anthropics/knowledge-work-plugins",
       "category": "Tool",
       "stars": 0,
       "tags": [
-        "Example",
-        "Demo"
+        "Plugins",
+        "Management",
+        "MCP",
+        "Configuration",
+        "Customization"
       ],
-      "installCmd": "/plugin add username/example-plugin"
-    },
-    {
-      "id": "anthropics/claude-code",
-      "name": "Test MCP Weather Plugin",
-      "description": "A test MCP server that provides real-time weather data for any location worldwide. Supports current conditions, forecasts, and historical data.",
-      "author": "TestAuthor",
-      "repo": "anthropics/claude-code",
-      "category": "Other",
-      "tags": [],
-      "installCmd": "npm install claude-code",
-      "submittedAt": "2026-02-13T21:35:33.282Z"
+      "installCmd": "/plugin add anthropics/knowledge-work-plugins/cowork-plugin-management"
     }
   ]
 }
