@@ -1,0 +1,142 @@
+name: Auto-Merge Plugin Submissions
+
+on:
+  workflow_run:
+    workflows: ["Validate Marketplace Schema"]
+    types:
+      - completed
+
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'pull_request' ||
+      github.event.workflow_run.conclusion == 'success'
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Auto-merge plugin submission PRs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Get the PR number from the event
+            let prNumber;
+            if (context.eventName === 'pull_request') {
+              prNumber = context.payload.pull_request.number;
+            } else if (context.eventName === 'workflow_run') {
+              // Extract PR number from the workflow run
+              const { data: prList } = await github.rest.pulls.list({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open',
+                head: `${context.repo.owner}:${context.payload.workflow_run.head_branch}`,
+              });
+              if (prList.length === 0) {
+                console.log('No open PR found for this workflow run');
+                return;
+              }
+              prNumber = prList[0].number;
+            }
+
+            // Fetch the PR details
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+            });
+
+            if (!pr.title.startsWith('[Plugin Submission]')) {
+              console.log(`Skipping PR #${pr.number}: not a plugin submission`);
+              return;
+            }
+
+            // Check if all CI checks have passed
+            const { data: checks } = await github.rest.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: pr.head.sha,
+            });
+
+            const hasPendingChecks = checks.check_runs.some(c => 
+              c.status !== 'completed' || c.conclusion === null
+            );
+
+            if (hasPendingChecks) {
+              console.log(`⏳ PR #${pr.number} has checks still in progress`);
+              return;
+            }
+
+            const allPassed = checks.check_runs.length > 0 &&
+              checks.check_runs.every(c => c.conclusion === 'success');
+
+            if (!allPassed) {
+              console.log(`⏳ PR #${pr.number} checks not all passed yet`);
+              return;
+            }
+
+            // Check for Copilot review comments
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number,
+            });
+
+            const copilotReviews = reviews.filter(r =>
+              r.user?.login === 'copilot[bot]'
+            );
+
+            // Check for inline review comments from Copilot
+            const { data: reviewComments } = await github.rest.pulls.listReviewComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number,
+            });
+
+            const copilotComments = reviewComments.filter(c =>
+              c.user?.login === 'copilot[bot]'
+            );
+
+            // If Copilot left any comments, require manual review
+            if (copilotComments.length > 0) {
+              console.log(`🛑 PR #${pr.number} has ${copilotComments.length} Copilot review comment(s) — requires manual review`);
+              
+              // Add a label to flag it for manual review
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  labels: ['needs-manual-review'],
+                });
+              } catch (err) {
+                console.log(`Could not add label: ${err.message}`);
+              }
+              return;
+            }
+
+            // Check if Copilot reviewed but left no comments (clean review)
+            if (copilotReviews.length > 0) {
+              console.log(`✅ Copilot reviewed PR #${pr.number} with no issues`);
+            }
+
+            // All checks passed + no Copilot concerns = safe to merge
+            console.log(`✅ Auto-merging PR #${pr.number}: ${pr.title}`);
+            try {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                merge_method: 'squash',
+                commit_title: pr.title,
+              });
+              console.log(`Merged PR #${pr.number}`);
+            } catch (err) {
+              console.log(`Failed to merge PR #${pr.number}: ${err.message}`);
+            }
+
