@@ -187,6 +187,23 @@
         "Customization"
       ],
       "installCmd": "/plugin add anthropics/knowledge-work-plugins/cowork-plugin-management"
+    },
+    {
+      "id": "hermes-tweet",
+      "name": "Hermes Tweet",
+      "description": "Native Hermes Agent plugin for X/Twitter research, read workflows, and approval-gated social actions through Xquik automation.",
+      "author": "Xquik",
+      "repo": "Xquik-dev/hermes-tweet",
+      "category": "Integration",
+      "stars": 9,
+      "tags": [
+        "x",
+        "twitter",
+        "social",
+        "automation",
+        "hermes"
+      ],
+      "installCmd": "/plugin add Xquik-dev/hermes-tweet"
     }
   ]
 }
